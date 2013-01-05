@@ -544,6 +544,13 @@ defaults write com.apple.appstore ShowDebugMenu -bool true
 #defaults write com.twitter.twitter-mac HideInBackground -bool true
 
 ###############################################################################
+# Postgresql                                                                  #
+###############################################################################
+
+# Hides the Postgresql user installed by EnterpriseDB installer
+defaults write /Library/Preferences/com.apple.loginwindow HiddenUsersList -array-add PostgreSQL
+
+###############################################################################
 # Kill affected applications                                                  #
 ###############################################################################
 
