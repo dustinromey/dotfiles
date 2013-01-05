@@ -28,8 +28,8 @@ defaults write com.apple.menuextra.battery ShowTime -string "NO"
 # Menu bar: hide the useless Time Machine and Volume icons
 defaults write com.apple.systemuiserver menuExtras -array "/System/Library/CoreServices/Menu Extras/Bluetooth.menu" "/System/Library/CoreServices/Menu Extras/AirPort.menu" "/System/Library/CoreServices/Menu Extras/Battery.menu" "/System/Library/CoreServices/Menu Extras/Clock.menu"
 
-# Always show scrollbars
-defaults write NSGlobalDomain AppleShowScrollBars -string "Always"
+# Always show scrollbars  -- changed back, prefer the default
+defaults write NSGlobalDomain AppleShowScrollBars -string "Automatic"
 
 # Disable smooth scrolling
 # (Uncomment if you’re on an older Mac that messes up the animation)
