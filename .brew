@@ -45,7 +45,8 @@ brew tap josegonzalez/homebrew-php
 # Already installed or waiting for nginx custom install
 #brew install php54
 #brew install git
-#brew install node
+brew install node
+brew install postgresql
 
 # Remove outdated versions from the cellar
 brew cleanup
