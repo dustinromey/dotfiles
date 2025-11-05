@@ -18,12 +18,18 @@ This setup uses a **layered approach**:
 
 ---
 
-## Step 1: Install Omarchy
+## Step 1: Install Base System & Omarchy
 
 On the new machine:
 
 ```bash
-# Install Omarchy (if not already installed)
+# Update system first
+sudo pacman -Syu
+
+# Install essential packages
+sudo pacman -S git stow
+
+# Install Omarchy (this will install Hyprland and many dependencies)
 bash <(curl -s https://omarchy.org/install)
 
 # Or update existing installation
@@ -32,7 +38,28 @@ omarchy-update
 
 ---
 
-## Step 2: Set Up Dotfiles Repository
+## Step 2: Install Niri & Dependencies
+
+Omarchy installs Hyprland by default, but we need niri and some additional packages:
+
+```bash
+# Install niri and window manager dependencies
+sudo pacman -S niri ly
+
+# Install Omarchy-compatible tools (if not already installed)
+sudo pacman -S waybar mako swayosd swaybg \
+               hyprpicker dolphin kvantum \
+               elephant walker cliphist wl-clipboard \
+               playerctl ghostty
+
+# Enable ly display manager
+sudo systemctl enable ly.service
+sudo systemctl start ly.service
+```
+
+---
+
+## Step 3: Set Up Dotfiles Repository
 
 ### On Current Machine (Laptop):
 
@@ -111,7 +138,7 @@ git commit -m "Initial niri-Omarchy dotfiles"
 
 ---
 
-## Step 3: Deploy to New Machine (Desktop)
+## Step 4: Deploy to New Machine (Desktop)
 
 ### On New Machine:
 
@@ -155,23 +182,6 @@ nano ~/.config/environment.d/fcitx.conf
 # Edit niri config.kdl environment section
 nano ~/.config/niri/config.kdl
 # Update PATH line if username is different
-```
-
----
-
-## Step 4: Install Required Packages
-
-Make sure these are installed on the new machine:
-
-```bash
-# Core niri-Omarchy dependencies
-sudo pacman -S niri waybar mako swayosd swaybg \
-               hyprpicker dolphin kvantum \
-               elephant walker cliphist wl-clipboard \
-               playerctl
-
-# Optional but recommended
-sudo pacman -S ghostty alacritty
 ```
 
 ---
