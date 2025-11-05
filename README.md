@@ -6,12 +6,35 @@ Personal dotfiles for niri window manager integrated with Omarchy.
 
 ### On a New Machine
 
-1. Install Omarchy: `bash <(curl -s https://omarchy.org/install)`
-2. Clone this repo: `git clone <your-repo> ~/dotfiles`
-3. Make scripts executable: `chmod +x ~/dotfiles/omarchy-hooks/.config/omarchy/hooks/* ~/dotfiles/omarchy-scripts/.local/share/omarchy/bin/*`
-4. Deploy with stow: `cd ~/dotfiles && stow -t ~/ niri hypr waybar-niri omarchy-hooks omarchy-scripts environment`
-5. Validate: `niri validate`
-6. Log in to niri via ly display manager
+1. **Install base system:**
+   ```bash
+   sudo pacman -Syu
+   sudo pacman -S git stow
+   bash <(curl -s https://omarchy.org/install)
+   ```
+
+2. **Install niri and dependencies:**
+   ```bash
+   sudo pacman -S niri ly waybar mako swayosd swaybg \
+                  hyprpicker dolphin kvantum elephant \
+                  walker cliphist wl-clipboard playerctl ghostty
+   sudo systemctl enable ly.service
+   ```
+
+3. **Clone and deploy dotfiles:**
+   ```bash
+   git clone git@github.com:dustinromey/dotfiles.git ~/dotfiles
+   cd ~/dotfiles
+   chmod +x omarchy-hooks/.config/omarchy/hooks/*
+   chmod +x omarchy-scripts/.local/share/omarchy/bin/*
+   stow -t ~/ niri hypr waybar-niri omarchy-hooks omarchy-scripts environment
+   ```
+
+4. **Validate and reboot:**
+   ```bash
+   niri validate
+   # Log out and select niri from ly display manager
+   ```
 
 See `SETUP.md` for detailed instructions.
 
