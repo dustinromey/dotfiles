@@ -51,6 +51,9 @@ binds {
     MOD+ALT+SPACE hotkey-overlay-title="Omarchy Menu" { spawn-sh "omarchy-menu"; }
     MOD+ESCAPE hotkey-overlay-title="System Menu" { spawn-sh "omarchy-menu system"; }
 
+    // ─── Meeting Setup ───
+    MOD+M hotkey-overlay-title="Meeting Setup" { spawn-sh "niri-meeting-setup"; }
+
     // ─── Aesthetics ───
     MOD+SHIFT+SPACE hotkey-overlay-title="Toggle Waybar" { spawn-sh "pkill waybar || waybar -c ~/.config/waybar-niri/config.jsonc &"; }
     MOD+CTRL+SPACE hotkey-overlay-title="Next Background" { spawn-sh "omarchy-theme-bg-next"; }
@@ -100,27 +103,27 @@ binds {
     MOD+DOWN                            { focus-window-down; }
     MOD+J                               { focus-window-down; }
 
-    MOD+CTRL+LEFT                       { move-column-left; }
-    MOD+CTRL+H                          { move-column-left; }
-    MOD+CTRL+RIGHT                      { move-column-right; }
-    MOD+CTRL+L                          { move-column-right; }
-    MOD+CTRL+UP                         { move-window-up; }
-    MOD+CTRL+DOWN                       { move-window-down; }
+    MOD+SHIFT+LEFT                      { move-column-left; }
+    MOD+SHIFT+H                         { move-column-left; }
+    MOD+SHIFT+RIGHT                     { move-column-right; }
+    MOD+SHIFT+L                         { move-column-right; }
+    MOD+SHIFT+UP                        { move-window-up; }
+    MOD+SHIFT+DOWN                      { move-window-down; }
 
     MOD+HOME                            { focus-column-first; }
     MOD+END                             { focus-column-last; }
-    MOD+CTRL+HOME                       { move-column-to-first; }
-    MOD+CTRL+END                        { move-column-to-last; }
+    MOD+SHIFT+HOME                      { move-column-to-first; }
+    MOD+SHIFT+END                       { move-column-to-last; }
 
-    MOD+SHIFT+LEFT                      { focus-monitor-left; }
-    MOD+SHIFT+RIGHT                     { focus-monitor-right; }
-    MOD+SHIFT+UP                        { focus-monitor-up; }
-    MOD+SHIFT+DOWN                      { focus-monitor-down; }
+    MOD+SHIFT+CTRL+LEFT                 { focus-monitor-left; }
+    MOD+SHIFT+CTRL+RIGHT                { focus-monitor-right; }
+    MOD+SHIFT+CTRL+UP                   { focus-monitor-up; }
+    MOD+SHIFT+CTRL+DOWN                 { focus-monitor-down; }
 
-    MOD+SHIFT+CTRL+LEFT                 { move-column-to-monitor-left; }
-    MOD+SHIFT+CTRL+RIGHT                { move-column-to-monitor-right; }
-    MOD+SHIFT+CTRL+UP                   { move-column-to-monitor-up; }
-    MOD+SHIFT+CTRL+DOWN                 { move-column-to-monitor-down; }
+    MOD+SHIFT+CTRL+H                    { move-column-to-monitor-left; }
+    MOD+SHIFT+CTRL+L                    { move-column-to-monitor-right; }
+    MOD+SHIFT+CTRL+K                    { move-column-to-monitor-up; }
+    MOD+SHIFT+CTRL+J                    { move-column-to-monitor-down; }
 
     // ─── Workspace Switching ───
     MOD+WHEELSCROLLDOWN                 cooldown-ms=150 { focus-workspace-down; }
@@ -223,12 +226,12 @@ binds {
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Layout
 
     layout {
-        gaps 8 // Gap between windows
-        center-focused-column "never" // Don’t auto-center focused column
+        gaps 6 // Gap between windows
+        center-focused-column "never" // Don't auto-center (manual with MOD+C if needed)
 
-        // Set the default width of new windows.
+        // Set the default width of new windows to 80%
         default-column-width {
-            proportion 0.66667;
+            proportion 0.8;
         }
 
         preset-column-widths {
