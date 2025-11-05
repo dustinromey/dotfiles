@@ -1,0 +1,10 @@
+# Ignore machine-specific files
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Ignore any secrets
+*secret*
+*password*
+*token*

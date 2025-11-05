@@ -1,0 +1,31 @@
+#!/bin/bash
+
+# Theme KDE/Qt apps (like Dolphin) to match Omarchy themes
+
+# Check if light or dark mode
+if [[ -f ~/.config/omarchy/current/theme/light.mode ]]; then
+  KVANTUM_THEME="KvFlatLight"
+else
+  KVANTUM_THEME="KvAdaptaDark"
+fi
+
+# Set Kvantum theme
+mkdir -p ~/.config/Kvantum
+echo "theme=$KVANTUM_THEME" > ~/.config/Kvantum/kvantum.kvconfig
+
+# Set icon theme for Qt apps (matches what's set for GTK)
+ICON_THEME_FILE=~/.config/omarchy/current/theme/icons.theme
+if [[ -f $ICON_THEME_FILE ]]; then
+  ICON_THEME="$(<$ICON_THEME_FILE)"
+else
+  ICON_THEME="Yaru-blue"
+fi
+
+# KDE apps use a different config location for icon themes
+mkdir -p ~/.config/kdeglobals.d
+cat > ~/.config/kdeglobals.d/icons.conf << EOF
+[Icons]
+Theme=$ICON_THEME
+EOF
+
+echo "Set Qt/KDE theme: $KVANTUM_THEME with icons: $ICON_THEME"

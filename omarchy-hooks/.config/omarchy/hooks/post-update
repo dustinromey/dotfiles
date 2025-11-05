@@ -1,0 +1,45 @@
+#!/bin/bash
+# Niri post-update hook
+# This runs after every omarchy-update to maintain niri-specific customizations
+
+set -e
+
+echo "Running niri post-update customizations..."
+
+# 1. Ensure waybar-niri style.css symlink is intact
+if [ ! -L ~/.config/waybar-niri/style.css ]; then
+  echo "  → Recreating waybar-niri style.css symlink"
+  ln -sf ~/.config/waybar/style.css ~/.config/waybar-niri/style.css
+fi
+
+# 2. Update waybar-niri config if the main waybar config was updated
+# Copy new config and convert hyprland modules to niri
+if [ ~/.config/waybar/config.jsonc -nt ~/.config/waybar-niri/config.jsonc ]; then
+  echo "  → Updating waybar-niri config from Omarchy waybar"
+  cp ~/.config/waybar/config.jsonc ~/.config/waybar-niri/config.jsonc
+  sed -i 's/"hyprland\/workspaces"/"niri\/workspaces"/g' ~/.config/waybar-niri/config.jsonc
+  sed -i 's/"hyprland\//"niri\//g' ~/.config/waybar-niri/config.jsonc
+  # Fix OMARCHY_PATH variable to use absolute path
+  sed -i 's|\$OMARCHY_PATH|~/.local/share/omarchy|g' ~/.config/waybar-niri/config.jsonc
+
+  # Restart waybar if running under niri
+  if [ "$XDG_CURRENT_DESKTOP" = "niri" ] && pgrep -x waybar >/dev/null; then
+    echo "  → Restarting waybar for niri"
+    pkill waybar
+    waybar -c ~/.config/waybar-niri/config.jsonc &
+  fi
+fi
+
+# 3. Ensure environment.d has correct Omarchy PATH
+if grep -q "/home/$USER/.config/omarchy/bin" ~/.config/environment.d/fcitx.conf 2>/dev/null; then
+  echo "  → Fixing PATH in environment.d/fcitx.conf"
+  sed -i "s|/home/$USER/.config/omarchy/bin|/home/$USER/.local/share/omarchy/bin|g" ~/.config/environment.d/fcitx.conf
+fi
+
+# Add more niri-specific customizations here as needed
+# Examples:
+# - Custom theme adjustments
+# - Niri-specific keybind configurations
+# - Service startup modifications
+
+echo "✓ Niri customizations complete"

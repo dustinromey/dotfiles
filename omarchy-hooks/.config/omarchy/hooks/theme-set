@@ -1,0 +1,35 @@
+#!/bin/bash
+# Niri theme-set hook
+# This runs after omarchy-theme-set to handle niri-specific theme changes
+
+THEME_NAME="$1"
+
+# Only run if we're in niri
+if [ "$XDG_CURRENT_DESKTOP" != "niri" ]; then
+  exit 0
+fi
+
+echo "Applying theme '$THEME_NAME' to niri..."
+
+# Apply KDE/Qt theming (for Dolphin, etc.)
+if command -v omarchy-theme-set-kde &> /dev/null; then
+  omarchy-theme-set-kde
+fi
+
+# Restart waybar with niri-specific config
+# (omarchy-restart-waybar already restarted it, but with wrong config)
+if pgrep -x waybar >/dev/null; then
+  pkill waybar
+  sleep 0.2
+  waybar -c ~/.config/waybar-niri/config.jsonc &
+fi
+
+# Reload swaybg (background should already be updated by omarchy-theme-bg-next)
+# Just make sure it's running with the current background
+if pgrep -x swaybg >/dev/null; then
+  pkill swaybg
+  sleep 0.2
+  swaybg -i ~/.config/omarchy/current/background -m fill &
+fi
+
+echo "✓ Theme '$THEME_NAME' applied to niri"
