@@ -57,8 +57,9 @@ keybind = ctrl+shift+d=new_split:down
 keybind = shift+enter=text:\n
 
 # Font configuration
-font-family = CaskaydiaMono Nerd Font
-font-size = 12
+# font-family = CaskaydiaMono Nerd Font
+font-family = Hack Nerd Font
+font-size = 13
 
 # Window settings
 window-padding-x = 14
