@@ -1,0 +1,27 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run `zed: open default settings` from the
+// command palette (cmd-shift-p / ctrl-shift-p)
+{
+  "terminal": {
+    "font_family": "Hack",
+    "copy_on_select": true
+  },
+  "ui_font_size": 16,
+  "buffer_font_size": 15,
+  "theme": {
+    "mode": "system",
+    "light": "One Light",
+    "dark": "One Dark"
+  },
+  "autosave": "on_focus_change",
+  "format_on_save": "off",
+  "hard_tabs": false,
+  "tab_size": 2,
+  "soft_wrap": "editor_width",
+  "show_completions_on_input": true
+}
