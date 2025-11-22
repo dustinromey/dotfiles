@@ -29,7 +29,7 @@ input {
 
     mouse {
       // Disable natural scroll for Trackball
-      natural-scroll
+      // natural-scroll
     }
 
     focus-follows-mouse // Automatically focus windows under the mouse pointer
@@ -201,6 +201,8 @@ binds {
 
 // ────────────── Startup Applications ──────────────
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Miscellaneous#spawn-sh-at-startup
+    // XWayland
+    spawn-at-startup "Xwayland" ":0"
 
     // ─── Core Services ───
     spawn-sh-at-startup "/usr/lib/polkit-kde-authentication-agent-1 &" // Polkit

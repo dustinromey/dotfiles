@@ -208,3 +208,6 @@ export XTUPLE_DB_USER="admin"       # Database username
 alias tm='task-master'
 alias taskmaster='task-master'
 export PATH=$HOME/.npm-global/bin:$PATH
+
+# For XWayland to run xTuple
+export DISPLAY=:0
