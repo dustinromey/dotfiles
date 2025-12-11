@@ -1,0 +1,13 @@
+#!/bin/bash
+# xTuple ERP CPAL Launcher Wrapper
+
+INSTALL_DIR="$HOME/.local/share/xtuple-cpal"
+
+if [ ! -f "$INSTALL_DIR/run-xtuple.sh" ]; then
+    echo "Error: xTuple not properly installed"
+    echo "Run install-local.sh to install"
+    exit 1
+fi
+
+cd "$INSTALL_DIR"
+exec ./run-xtuple.sh "$@"
