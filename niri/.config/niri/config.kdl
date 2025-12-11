@@ -82,6 +82,12 @@ binds {
         spawn "sh" "-c" "swww img $(find ~/Pictures/Backgrounds/ -type f | shuf -n 1)"
     }
 
+    // Speech to Text - types directly into focused window
+    Mod+R { spawn "sh" "-c" "pgrep -x waystt >/dev/null && pkill --signal SIGUSR1 waystt || (waystt --pipe-to /usr/bin/ydotool type --file - &)"; }
+
+    // Speech to Text - copies to clipboard instead
+    Mod+Shift+R { spawn "sh" "-c" "pgrep -x waystt >/dev/null && pkill --signal SIGUSR1 waystt || (waystt --pipe-to /usr/bin/wl-copy &)"; }
+
     // ── Audio Controls (with OSD) ───
     // Using swayosd for on-screen display
     XF86AudioRaiseVolume                allow-when-locked=true { spawn-sh "swayosd-client --output-volume raise"; }
@@ -179,7 +185,8 @@ binds {
 
     // ─── Modes ───
     MOD+T                               { toggle-window-floating; }
-    MOD+F                               { fullscreen-window; }
+    MOD+F                               { maximize-column; }
+    MOD+SHIFT+F                         { fullscreen-window; }
     MOD+SHIFT+T                         { toggle-column-tabbed-display; }
 
     // ─── Screenshots ───
@@ -326,6 +333,9 @@ binds {
         QT_WAYLAND_DISABLE_WINDOWDECORATION "1"
         XDG_SESSION_TYPE "wayland"
         XDG_CURRENT_DESKTOP "niri"
+
+        // for Speech To Text
+        YDOTOOL_SOCKET "/tmp/.ydotool_socket"
 
         // Add Omarchy bin to PATH
         PATH "/home/dustin/.local/share/omarchy/bin:/home/dustin/.local/bin:/usr/local/bin:/usr/bin:/bin"
